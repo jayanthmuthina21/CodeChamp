@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Challenge of the Month</title>
+  </head>
+  <body>
+    <h1>Algorithm Challenge of the Month</h1>
+    <a href="/questions">View Questions</a>
+    <a href="/submit">Submit Your Solution</a>
+    <h2>Submissions</h2>
+    <ul>
+      {% for submission in submissions %}
+        <li>
+          <strong>{{ submission.name }}</strong>: {{ submission.solution }} 
+          (Score: {{ submission.score }})
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

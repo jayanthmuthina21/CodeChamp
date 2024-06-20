@@ -1,0 +1,13 @@
+[
+    {
+        "name": "jauanth",
+        "solution": "jdjd",
+        "votes": 3
+    },
+    {
+        "name": "jaja",
+        "question_id": 1,
+        "solution": "def sum_two_numbers(a, b):\r\n    return a + b\r\n",
+        "score": 1
+    }
+]

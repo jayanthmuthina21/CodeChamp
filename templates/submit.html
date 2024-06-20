@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Solution</title>
+  </head>
+  <body>
+    <h1>Submit Your Solution</h1>
+    <form action="/submit" method="post">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+      <label for="question">Select Question:</label>
+      <select id="question" name="question_id" required>
+        {% for question in questions %}
+          <option value="{{ question.id }}">Question {{ question.id }}</option>
+        {% endfor %}
+      </select><br><br>
+      <label for="solution">Your Solution:</label><br>
+      <textarea id="solution" name="solution" rows="10" cols="30" required></textarea><br><br>
+      <input type="submit" value="Submit">
+    </form>
+    <a href="/">Back to Home</a>
+  </body>
+</html>
