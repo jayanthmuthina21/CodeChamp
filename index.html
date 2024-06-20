@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeChamp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #score {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to CodeChamp!</h1>
+    <div class="question">
+        <h2>Question 1: Reverse a String</h2>
+        <p>Write a function that takes a string as input and returns the string reversed.</p>
+        <textarea id="codeArea1" placeholder="Enter your JavaScript code here"></textarea>
+        <button onclick="runCode(1)">Run Code</button>
+        <div id="result1"></div>
+    </div>
+    <div class="question">
+        <h2>Question 2: Sum of Array</h2>
+        <p>Write a function that takes an array of numbers as input and returns the sum of the numbers.</p>
+        <textarea id="codeArea2" placeholder="Enter your JavaScript code here"></textarea>
+        <button onclick="runCode(2)">Run Code</button>
+        <div id="result2"></div>
+    </div>
+    <div id="score"></div>
+    <script>
+        const questions = [
+            {
+                id: 1,
+                test: () => reverseString('hello') === 'olleh',
+                solution: `function reverseString(str) {
+                    return str.split('').reverse().join('');
+                }`
+            },
+            {
+                id: 2,
+                test: () => sumArray([1, 2, 3, 4]) === 10,
+                solution: `function sumArray(arr) {
+                    return arr.reduce((a, b) => a + b, 0);
+                }`
+            }
+        ];
+        
+        let score = 0;
+
+        function runCode(questionId) {
+            const codeArea = document.getElementById('codeArea' + questionId).value;
+            const resultDiv = document.getElementById('result' + questionId);
+            const question = questions.find(q => q.id === questionId);
+            try {
+                eval(codeArea); // Execute the user's code
+                if (question.test()) {
+                    resultDiv.textContent = 'Correct!';
+                    score++;
+                } else {
+                    resultDiv.textContent = 'Incorrect. Try again.';
+                }
+            } catch (error) {
+                resultDiv.textContent = 'Error: ' + error.message;
+            }
+            document.getElementById('score').textContent = 'Score: ' + score;
+        }
+    </script>
+</body>
+</html>
