@@ -1,0 +1,26 @@
+function runCode(questionId) {
+    const username = document.getElementById('username').value;
+    const codeArea = document.getElementById('codeArea' + questionId).value;
+    const resultDiv = document.getElementById('result' + questionId);
+    const question = questions.find(q => q.id === questionId);
+    
+    Sk.configure({output: (text) => resultDiv.textContent += text, read: (x) => Sk.builtinFiles.files[x]});
+    
+    try {
+        Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, codeArea, true))
+            .then(() => {
+                if (question.test()) {
+                    resultDiv.textContent = 'Correct!';
+                    score++;
+                } else {
+                    resultDiv.textContent = 'Incorrect. Try again.';
+                }
+                document.getElementById('score').textContent = 'Score: ' + score;
+            })
+            .catch((err) => {
+                resultDiv.textContent = 'Error: ' + err.toString();
+            });
+    } catch (error) {
+        resultDiv.textContent = 'Error: ' + error.message;
+    }
+}
